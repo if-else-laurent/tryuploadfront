@@ -17,7 +17,8 @@ export function axiosUsers(token) {
     try {
       dispatch({ type: BEGIN_LOAD_AXIOS_USERS });
       const headers = { authToken: token }
-      const res = await axios.get('/api/', {
+      // const res = await axios.get('/api/', {
+      const res = await axios.get(`${process.env.REACT_APP_API}/api/`, {
         headers: headers
       })
       console.log('res', res)
@@ -39,7 +40,7 @@ export function deleteUser(id, token) {
     try {
       // const res = await axios.delete('http://localhost:5000/' + id)
       const headers = { authToken: token }
-      const res = await axios.delete('/api/' + id, {
+      const res = await axios.delete(`${process.env.REACT_APP_API}/api/` + id, {
         headers: headers
       })
       console.log('res', res)
@@ -59,7 +60,7 @@ export function addUser(newUser, token) {
   return async dispatch => {
     try {
       const headers = { authToken: token }
-      const res = await axios.post('/api/add', newUser, {
+      const res = await axios.post(`${process.env.REACT_APP_API}/api/add`, newUser, {
         headers: headers
       })
       dispatch({
@@ -78,7 +79,7 @@ export function addUser(newUser, token) {
 export const registerUser = (newUser) => {
   return async dispatch => {
     try {
-      const res = await axios.post('/api/auth/register', newUser)
+      const res = await axios.post(`${process.env.REACT_APP_API}/api/auth/register`, newUser)
       dispatch({
         type: REGISTER_USER,
       })
@@ -92,7 +93,7 @@ export const registerUser = (newUser) => {
 export const loginUser = (user) => {
   return async dispatch => {
     try {
-      const res = await axios.post('/api/auth/login', user)
+      const res = await axios.post(`${process.env.REACT_APP_API}/api/auth/login`, user)
       dispatch({
         type: LOGIN_USER,
         payload: res.data
